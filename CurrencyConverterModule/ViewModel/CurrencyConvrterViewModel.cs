@@ -1,8 +1,10 @@
 ﻿using Core;
 using CurrencyConverter.BusinessLayer;
 using CurrencyConverter.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CurrencyConverter.ViewModel
@@ -90,10 +92,22 @@ namespace CurrencyConverter.ViewModel
 
         private async void LoadCountries()
         {
-            Task<ObservableCollection<ICountry>> countriesTask =
+            try
+            {
+                IsBusy = true;
+                Task<ObservableCollection<ICountry>> countriesTask =
                 Task.Factory.StartNew(() => currencyConverterService.GetCountries());
-            await countriesTask;
-            Countries = countriesTask.Result;
+                await countriesTask;
+                Countries = countriesTask.Result;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Looks like api server is down. https://free.currconv.com \n. Try again later during day time");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private bool CanConvert(object arg)
@@ -103,13 +117,24 @@ namespace CurrencyConverter.ViewModel
 
         private async void Convert(object arg)
         {
-            Task<decimal> exchangeRateTask = Task.Factory.StartNew(() => currencyConverterService.GetEXchangeRate(FromCountry, toCountry));
-            await exchangeRateTask;
-            if (exchangeRateTask.Result > 0)
+            try
             {
-                ToAmount = FromAmount * exchangeRateTask.Result;
+                IsBusy = true;
+                Task<decimal> exchangeRateTask = Task.Factory.StartNew(() => currencyConverterService.GetEXchangeRate(FromCountry, toCountry));
+                await exchangeRateTask;
+                if (exchangeRateTask.Result > 0)
+                {
+                    ToAmount = FromAmount * exchangeRateTask.Result;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Looks like api server is down. https://free.currconv.com \n. Try again later during day time");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
-
     }
 }

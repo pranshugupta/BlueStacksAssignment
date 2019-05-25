@@ -5,6 +5,19 @@ namespace Core
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
+        bool isBusy;
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                isBusy = value;
+                NotifyPropertyChanged();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

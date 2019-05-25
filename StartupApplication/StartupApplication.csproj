@@ -82,6 +82,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ScreenMaskResources.xaml">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScreenMaskResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,6 +128,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e350ad98-1d8f-465c-a6ab-32a32db664d2}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CurrencyConverterModule\CurrencyConverter.csproj">
       <Project>{18a49495-e06e-4800-8788-660565e177a0}</Project>
       <Name>CurrencyConverter</Name>

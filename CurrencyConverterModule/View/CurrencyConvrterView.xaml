@@ -3,55 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" >
-    <StackPanel>
-        <Label Content="Real Time Currency Converter: These exchange rates are fetched from:https://free.currconv.com"/>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Choose Currency Country:" Grid.Row="0" Grid.Column="0" 
+             xmlns:core="clr-namespace:Core;assembly=Core"
+             mc:Ignorable="d">
+    <core:ScreenMaskControl>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Real Time Currency Converter: These exchange rates are fetched from:https://free.currconv.com"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Choose Currency Country:" Grid.Row="0" Grid.Column="0" 
                Margin="5"/>
-            <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
-                  DisplayMemberPath="CurrencyId"
+                <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
+                  DisplayMemberPath="Name"
                   SelectedValue="{Binding FromCountry}" 
                   IsEditable="True" 
                   Grid.Row="0" Grid.Column="1"
                    Margin="5"/>
 
-            <Label Content="Choose Currency Country:" 
+                <Label Content="Choose Currency Country:" 
                Grid.Row="0" Grid.Column="2"
                 Margin="5"/>
-            <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
+                <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
                   DisplayMemberPath="Name"
                   SelectedValue="{Binding ToCountry}" 
                   IsEditable="True" 
                   Grid.Row="0" Grid.Column="3"
                    Margin="5"/>
 
-            <Label Content="Amount:" 
+                <Label Content="Amount:" 
                Grid.Row="1" Grid.Column="0"
                 Margin="5"/>
-            <TextBox Text="{Binding FromAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                <TextBox Text="{Binding FromAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Grid.Row="1" Grid.Column="1"
                   Margin="5"/>
 
-            <Label Content="Converted Amount:" 
+                <Label Content="Converted Amount:" 
                Grid.Row="1" Grid.Column="2"
                 Margin="5"/>
-            <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Grid.Row="1" Grid.Column="3" IsEnabled="False"
                   Margin="5"/>
-            <Button Content="Convert" Command="{Binding ConvertCommand}"
+                <Button Content="Convert" Command="{Binding ConvertCommand}"
                 Grid.Row="2" Grid.Column="3" Margin="5"/>
-        </Grid>
-    </StackPanel>
+            </Grid>
+        </StackPanel>
+    </core:ScreenMaskControl>
 </UserControl>
