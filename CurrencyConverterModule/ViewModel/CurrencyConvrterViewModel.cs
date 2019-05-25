@@ -1,4 +1,5 @@
 ﻿using Core;
+using CurrencyConverter.BusinessLayer;
 using CurrencyConverter.Model;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -6,10 +7,19 @@ using System.Windows.Input;
 
 namespace CurrencyConverter.ViewModel
 {
-    public class CurrencyConvrterViewModel : ViewModelBase
+    public interface ICurrencyConvrterViewModel
     {
-        ObservableCollection<Country> countries = null;
-        public ObservableCollection<Country> Countries
+        ObservableCollection<ICountry> Countries { get; set; }
+        ICountry FromCountry { get; set; }
+        decimal FromAmount { get; set; }
+        ICountry ToCountry { get; set; }
+        decimal ToAmount { get; set; }
+        ICommand ConvertCommand { get; set; }
+    }
+    public class CurrencyConvrterViewModel : ViewModelBase, ICurrencyConvrterViewModel
+    {
+        ObservableCollection<ICountry> countries = null;
+        public ObservableCollection<ICountry> Countries
         {
             get { return countries; }
             set
@@ -20,8 +30,8 @@ namespace CurrencyConverter.ViewModel
         }
 
 
-        Country fromCountry = null;
-        public Country FromCountry
+        ICountry fromCountry = null;
+        public ICountry FromCountry
         {
             get { return fromCountry; }
             set
@@ -44,8 +54,8 @@ namespace CurrencyConverter.ViewModel
 
 
 
-        Country toCountry = null;
-        public Country ToCountry
+        ICountry toCountry = null;
+        public ICountry ToCountry
         {
             get { return toCountry; }
             set
@@ -80,7 +90,7 @@ namespace CurrencyConverter.ViewModel
 
         private async void LoadCountries()
         {
-            Task<ObservableCollection<Country>> countriesTask =
+            Task<ObservableCollection<ICountry>> countriesTask =
                 Task.Factory.StartNew(() => currencyConverterService.GetCountries());
             await countriesTask;
             Countries = countriesTask.Result;

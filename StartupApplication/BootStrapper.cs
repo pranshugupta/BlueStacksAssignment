@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using CurrencyConverter;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using System.Windows;
 
@@ -21,7 +22,7 @@ namespace StartupApplication
         {
             base.ConfigureModuleCatalog();
             ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof(CurrencyConverter.CurrencyConverterModule));
+            moduleCatalog.AddModule(typeof(CurrencyConverterModule));
         }
     }
 }

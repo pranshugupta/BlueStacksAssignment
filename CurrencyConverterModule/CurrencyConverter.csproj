@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyConverterModule.cs" />
-    <Compile Include="CurrencyConverterService.cs" />
+    <Compile Include="BusinessLayer\CurrencyConverterService.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

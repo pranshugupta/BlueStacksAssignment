@@ -4,18 +4,18 @@ using RestSharp;
 using System.Collections.ObjectModel;
 using System.Xml;
 
-namespace CurrencyConverter
+namespace CurrencyConverter.BusinessLayer
 {
     public interface ICurrencyConverterService
     {
-        ObservableCollection<Country> GetCountries();
-        decimal GetEXchangeRate(Country from, Country to);
+        ObservableCollection<ICountry> GetCountries();
+        decimal GetEXchangeRate(ICountry from, ICountry to);
     }
     public class CurrencyConverterService : ICurrencyConverterService
     {
-        public ObservableCollection<Country> GetCountries()
+        public ObservableCollection<ICountry> GetCountries()
         {
-            ObservableCollection<Country> countries = null;
+            ObservableCollection<ICountry> countries = null;
             var client = new RestClient(@"https://free.currconv.com/api/v7/countries?apiKey=do-not-use");
             var response = client.Execute(new RestRequest());
 
@@ -25,8 +25,8 @@ namespace CurrencyConverter
                 XmlNodeList countryNodes = doc.SelectNodes("/results/*");
                 if (countryNodes != null && countryNodes.Count > 0)
                 {
-                    countries = new ObservableCollection<Country>();
-                    Country country;
+                    countries = new ObservableCollection<ICountry>();
+                    ICountry country;
                     foreach (XmlNode countryNode in countryNodes)
                     {
                         country = new Country();
@@ -51,7 +51,7 @@ namespace CurrencyConverter
             return countries;
         }
 
-        public decimal GetEXchangeRate(Country from, Country to)
+        public decimal GetEXchangeRate(ICountry from, ICountry to)
         {
             decimal exchangeRate = 0;
             string conversionFromTo = $"{from.CurrencyId}_{to.CurrencyId}";
