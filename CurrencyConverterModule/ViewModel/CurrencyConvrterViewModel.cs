@@ -1,14 +1,14 @@
 ﻿using Core;
 using CurrencyConverter.Model;
-using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CurrencyConverter.ViewModel
 {
     public class CurrencyConvrterViewModel : ViewModelBase
     {
-        ObservableCollection<Country> countries = new ObservableCollection<Country>();
+        ObservableCollection<Country> countries = null;
         public ObservableCollection<Country> Countries
         {
             get { return countries; }
@@ -68,19 +68,38 @@ namespace CurrencyConverter.ViewModel
 
         public ICommand ConvertCommand { get; set; }
 
+        ICurrencyConverterService currencyConverterService;
+
         public CurrencyConvrterViewModel()
         {
             ConvertCommand = new RelayCommand(CanConvert, Convert);
+            currencyConverterService = new CurrencyConverterService();
+
+            LoadCountries();
+        }
+
+        private async void LoadCountries()
+        {
+            Task<ObservableCollection<Country>> countriesTask =
+                Task.Factory.StartNew(() => currencyConverterService.GetCountries());
+            await countriesTask;
+            Countries = countriesTask.Result;
         }
 
         private bool CanConvert(object arg)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        private void Convert(object arg)
+        private async void Convert(object arg)
         {
-            throw new NotImplementedException();
+            Task<decimal> exchangeRateTask = Task.Factory.StartNew(() => currencyConverterService.GetEXchangeRate(FromCountry, toCountry));
+            await exchangeRateTask;
+            if (exchangeRateTask.Result > 0)
+            {
+                ToAmount = FromAmount * exchangeRateTask.Result;
+            }
         }
+
     }
 }

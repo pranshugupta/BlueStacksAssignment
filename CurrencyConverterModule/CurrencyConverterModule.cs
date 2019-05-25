@@ -1,4 +1,6 @@
 ﻿
+using CurrencyConverter.View;
+using CurrencyConverter.ViewModel;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 
@@ -15,7 +17,7 @@ namespace CurrencyConverter
         }
         public void Initialize()
         {
-            regionManager.RegisterViewWithRegion(RegionConstants.CurrencyConverterRegion, typeof(View.CurrencyConvrterView));
+            regionManager.Regions[RegionConstants.CurrencyConverterRegion].Add(new CurrencyConvrterView(new CurrencyConvrterViewModel()), RegionConstants.CurrencyConverterRegion);
         }
     }
 }

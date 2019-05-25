@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Core;
+using System.Windows.Controls;
 
 namespace CurrencyConverter.View
 {
@@ -7,9 +8,10 @@ namespace CurrencyConverter.View
     /// </summary>
     public partial class CurrencyConvrterView : UserControl
     {
-        public CurrencyConvrterView()
+        public CurrencyConvrterView(ViewModelBase viewModel)
         {
             InitializeComponent();
+            this.DataContext = viewModel;
         }
     }
 }
