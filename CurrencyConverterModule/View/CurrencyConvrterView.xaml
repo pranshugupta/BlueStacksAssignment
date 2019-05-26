@@ -7,7 +7,24 @@
              mc:Ignorable="d">
     <core:ScreenMaskControl>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Label Content="Real Time Currency Converter: These exchange rates are fetched from: https://free.currconv.com"/>
+            <TextBlock Margin="5"  Width="700" TextWrapping="Wrap" 
+                       Text="Blue stack assignment to convert currency with real time exchange rates.&#x0a;
+&#x0a;
+Here we are using api from https://free.currconv.com.&#x0a;
+As it is a free version of API, exchange rate are refreshed at certain interval.&#x0a;
+Api server itself is also brought-down sometime for maintenance puprpose.&#x0a;
+Also it allows few no of requests at in 2 hours from same IP address.&#x0a;
+&#x0a;
+In case you are not able to use this, You can wait for some time and try again later or restart your router.&#x0a;
+&#x0a;
+Aplication exploits below framorks, most of them are added via nughet. Explicit dependencies are added with the source code.&#x0a;
+    1. WPF&#x0a;
+    2. PRISM&#x0a;
+    3. MVVM&#x0a;
+    4. IOC Unity Container&#x0a;
+    5. MOQ&#x0a;
+    6. NUnit"/>
+            <Line Stretch="Fill" Stroke="Black" X2="1"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -20,40 +37,32 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Choose Currency Country:" Grid.Row="0" Grid.Column="0" 
-               Margin="5"/>
+                <Label 
+                    Content="Choose Currency Country:" 
+                    Grid.Row="0" Grid.Column="0"/>
+                
                 <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
-                  DisplayMemberPath="Name"
+                  DisplayMemberPath="CurrencyId"
                   SelectedValue="{Binding FromCountry}" 
                   IsEditable="True" 
-                  Grid.Row="0" Grid.Column="1"
-                   Margin="5"/>
+                  Grid.Row="0" Grid.Column="1"/>
 
-                <Label Content="Choose Currency Country:" 
-               Grid.Row="0" Grid.Column="2"
-                Margin="5"/>
+                <Label Content="Choose Currency Country:"
+                       Grid.Row="0" Grid.Column="2"/>
                 <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
-                  DisplayMemberPath="Name"
+                  DisplayMemberPath="CurrencyId"
                   SelectedValue="{Binding ToCountry}" 
                   IsEditable="True" 
-                  Grid.Row="0" Grid.Column="3"
-                   Margin="5"/>
+                  Grid.Row="0" Grid.Column="3" />
 
-                <Label Content="Amount:" 
-               Grid.Row="1" Grid.Column="0"
-                Margin="5"/>
+                <Label Content="Amount:" Grid.Row="1" Grid.Column="0"/>
                 <TextBox Text="{Binding FromAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  Grid.Row="1" Grid.Column="1"
-                  Margin="5"/>
+                  Grid.Row="1" Grid.Column="1"/>
 
-                <Label Content="Converted Amount:" 
-               Grid.Row="1" Grid.Column="2"
-                Margin="5"/>
-                <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  Grid.Row="1" Grid.Column="3" IsEnabled="False"
-                  Margin="5"/>
-                <Button Content="Convert" Command="{Binding ConvertCommand}"
-                Grid.Row="2" Grid.Column="3" Margin="5"/>
+                <Label Content="Converted Amount:" Grid.Row="1" Grid.Column="2"/>
+                <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                  Grid.Row="1" Grid.Column="3" IsEnabled="False"/>
+                <Button Content="Convert" Command="{Binding ConvertCommand}" Grid.Row="2" Grid.Column="3"/>
             </Grid>
         </StackPanel>
     </core:ScreenMaskControl>

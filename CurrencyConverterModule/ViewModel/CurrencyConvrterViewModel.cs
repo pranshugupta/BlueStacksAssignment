@@ -22,7 +22,6 @@ namespace CurrencyConverter.ViewModel
             }
         }
 
-
         ICountry fromCountry = null;
         public ICountry FromCountry
         {
@@ -111,7 +110,7 @@ namespace CurrencyConverter.ViewModel
             try
             {
                 IsBusy = true;
-                Task<decimal> exchangeRateTask = Task.Factory.StartNew(() => currencyConverterService.GetEXchangeRate(FromCountry, toCountry));
+                Task<decimal> exchangeRateTask = Task.Factory.StartNew(() => currencyConverterService.GetEXchangeRate(FromCountry, ToCountry));
                 await exchangeRateTask;
                 if (exchangeRateTask.Result > 0)
                 {

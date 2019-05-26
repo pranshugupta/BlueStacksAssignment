@@ -41,6 +41,9 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\PrismLibrary\log4net.dll</HintPath>
     </Reference>
@@ -101,7 +104,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ScreenMaskResources.xaml">
+    <Page Include="ComonStyles.xaml">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ScreenMaskResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScreenMaskControlStyles.xaml">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScreenMaskResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

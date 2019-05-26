@@ -4,7 +4,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ScreenMaskResources.xaml"/>
+                <ResourceDictionary Source="ComonStyles.xaml"/>
+                <ResourceDictionary Source="ScreenMaskControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
