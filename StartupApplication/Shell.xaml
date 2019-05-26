@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prsm="http://www.codeplex.com/prism"
         mc:Ignorable="d" ResizeMode="NoResize"
-        Title="BlueStacksAssignment" Height="200" Width="800">
+        Title="BlueStacksAssignment" Height="200" Width="800"
+        xmlns:cc="clr-namespace:CurrencyConverter;assembly=CurrencyConverter">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <ContentControl Name="MainRegion" prsm:RegionManager.RegionName="CurrencyConverterRegion" />
+        <ContentControl prsm:RegionManager.RegionName="{x:Static cc:Constants.CURRENCY_CONVERTER_REGION }" />
     </StackPanel>
 </Window>

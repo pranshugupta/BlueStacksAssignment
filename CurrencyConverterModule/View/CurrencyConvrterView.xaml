@@ -7,7 +7,7 @@
              mc:Ignorable="d">
     <core:ScreenMaskControl>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Label Content="Real Time Currency Converter: These exchange rates are fetched from:https://free.currconv.com"/>
+            <Label Content="Real Time Currency Converter: These exchange rates are fetched from: https://free.currconv.com"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
