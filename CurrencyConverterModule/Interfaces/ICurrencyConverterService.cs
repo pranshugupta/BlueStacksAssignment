@@ -1,5 +1,4 @@
-﻿using CurrencyConverter.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace CurrencyConverter.Interfaces
 {

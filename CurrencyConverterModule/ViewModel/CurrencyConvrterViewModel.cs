@@ -91,9 +91,9 @@ namespace CurrencyConverter.ViewModel
                 await countriesTask;
                 Countries = countriesTask.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Looks like api server https://free.currconv.com is down. Try again later");
+                MessageBox.Show(ex.Message);
             }
             finally
             {
@@ -118,9 +118,9 @@ namespace CurrencyConverter.ViewModel
                     ToAmount = FromAmount * exchangeRateTask.Result;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Looks like api server https://free.currconv.com is down. Try again later");
+                MessageBox.Show(ex.Message);
             }
             finally
             {

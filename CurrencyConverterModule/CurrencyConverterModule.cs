@@ -17,16 +17,15 @@ namespace CurrencyConverter
 
         public CurrencyConverterModule(IUnityContainer container, IRegionManager regionManager)
         {
-            this.regionManager = regionManager;
             this.container = container;
-
+            this.regionManager = regionManager;
         }
         public void Initialize()
         {
             RegisterTypes();
 
             regionManager.Regions[Constants.CURRENCY_CONVERTER_REGION]
-                .Add(container.Resolve<ICurrencyConverterView>(), Constants.CURRENCY_CONVERTER_REGION);
+                .Add(container.Resolve<ICurrencyConverterView>());
         }
 
         private void RegisterTypes()
