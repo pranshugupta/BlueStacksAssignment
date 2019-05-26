@@ -2,6 +2,7 @@
 using CurrencyConverter.Model;
 using Newtonsoft.Json;
 using RestSharp;
+using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 
@@ -9,11 +10,15 @@ namespace CurrencyConverter.BusinessLayer
 {
     public class CurrencyConverterService : ICurrencyConverterService
     {
+        IRestClient restClient;
+        public CurrencyConverterService(IRestClient restClient)
+        {
+            this.restClient = restClient;
+        }
         public ObservableCollection<ICountry> GetCountries()
         {
             ObservableCollection<ICountry> countries = null;
-            var client = new RestClient(@"https://free.currconv.com/api/v7/countries?apiKey=do-not-use");
-            var response = client.Execute(new RestRequest());
+            IRestResponse response = MakeRequest(Constants.API_URL_COUNTRIES);
 
             XmlDocument doc = JsonConvert.DeserializeXmlNode(response.Content);
             if (doc != null)
@@ -62,9 +67,7 @@ namespace CurrencyConverter.BusinessLayer
         {
             decimal exchangeRate = 0;
             string conversionFromTo = $"{from.CurrencyId}_{to.CurrencyId}";
-            string requestUrl = string.Format("https://free.currconv.com/api/v7/convert?apiKey=do-not-use&q={0}&compact=y", conversionFromTo);
-            var client = new RestClient(requestUrl); ;
-            var response = client.Execute(new RestRequest());
+            IRestResponse response = MakeRequest(string.Format(Constants.API_URL_EXCHANGE_RATE, conversionFromTo));
 
             XmlDocument doc = JsonConvert.DeserializeXmlNode(response.Content);
             XmlNode exchangeRateNode = doc.SelectSingleNode(string.Format("/{0}/val", conversionFromTo));
@@ -72,8 +75,14 @@ namespace CurrencyConverter.BusinessLayer
             {
                 decimal.TryParse(exchangeRateNode.InnerText, out exchangeRate);
             }
-
             return exchangeRate;
+        }
+
+        IRestResponse MakeRequest(string url)
+        {
+            restClient.BaseUrl = new Uri(url);
+            IRestResponse response = restClient.Execute(new RestRequest());
+            return response;
         }
     }
 }

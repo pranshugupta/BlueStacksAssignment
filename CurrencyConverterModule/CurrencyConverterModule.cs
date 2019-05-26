@@ -17,7 +17,9 @@ namespace CurrencyConverter
         }
         public void Initialize()
         {
-            regionManager.Regions[RegionConstants.CurrencyConverterRegion].Add(new CurrencyConvrterView(new CurrencyConvrterViewModel()), RegionConstants.CurrencyConverterRegion);
+            regionManager.Regions[Constants.CURRENCY_CONVERTER_REGION]
+                .Add(new CurrencyConvrterView(new CurrencyConvrterViewModel()),
+                Constants.CURRENCY_CONVERTER_REGION);
         }
     }
 }

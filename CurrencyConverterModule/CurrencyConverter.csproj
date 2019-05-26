@@ -79,7 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RegionConstants.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ViewModel\CurrencyConvrterViewModel.cs" />
     <Compile Include="View\CurrencyConvrterView.xaml.cs">
       <DependentUpon>CurrencyConvrterView.xaml</DependentUpon>
