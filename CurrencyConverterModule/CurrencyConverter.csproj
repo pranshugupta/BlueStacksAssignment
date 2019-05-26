@@ -59,8 +59,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICountry.cs" />
+    <Compile Include="Interfaces\ICurrencyConverterService.cs" />
     <Compile Include="CurrencyConverterModule.cs" />
     <Compile Include="BusinessLayer\CurrencyConverterService.cs" />
+    <Compile Include="Interfaces\ICurrencyConverterView.cs" />
+    <Compile Include="Interfaces\ICurrencyConvrterViewModel.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

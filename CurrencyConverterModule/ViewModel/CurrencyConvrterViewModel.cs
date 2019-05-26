@@ -1,6 +1,6 @@
 ﻿using Core;
 using CurrencyConverter.BusinessLayer;
-using CurrencyConverter.Model;
+using CurrencyConverter.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -9,15 +9,7 @@ using System.Windows.Input;
 
 namespace CurrencyConverter.ViewModel
 {
-    public interface ICurrencyConvrterViewModel
-    {
-        ObservableCollection<ICountry> Countries { get; set; }
-        ICountry FromCountry { get; set; }
-        decimal FromAmount { get; set; }
-        ICountry ToCountry { get; set; }
-        decimal ToAmount { get; set; }
-        ICommand ConvertCommand { get; set; }
-    }
+
     public class CurrencyConvrterViewModel : ViewModelBase, ICurrencyConvrterViewModel
     {
         ObservableCollection<ICountry> countries = null;
@@ -102,7 +94,7 @@ namespace CurrencyConverter.ViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Looks like api server is down. https://free.currconv.com \n. Try again later during day time");
+                MessageBox.Show("Looks like api server https://free.currconv.com is down. Try again later");
             }
             finally
             {
@@ -129,7 +121,7 @@ namespace CurrencyConverter.ViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Looks like api server is down. https://free.currconv.com \n. Try again later during day time");
+                MessageBox.Show("Looks like api server https://free.currconv.com is down. Try again later");
             }
             finally
             {

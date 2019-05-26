@@ -1,15 +1,7 @@
-﻿namespace CurrencyConverter.Model
-{
-    public interface ICountry
-    {
-        string Name { get; set; }
-        string ID { get; set; }
-        string Alpha3 { get; set; }
-        string CurrencyName { get; set; }
-        string CurrencyId { get; set; }
-        string CurrencySymbol { get; set; }
-    }
+﻿using CurrencyConverter.Interfaces;
 
+namespace CurrencyConverter.Model
+{
     public class Country : ICountry
     {
         public string Name { get; set; }

@@ -1,4 +1,5 @@
-﻿using CurrencyConverter.Model;
+﻿using CurrencyConverter.Interfaces;
+using CurrencyConverter.Model;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.ObjectModel;
@@ -6,11 +7,6 @@ using System.Xml;
 
 namespace CurrencyConverter.BusinessLayer
 {
-    public interface ICurrencyConverterService
-    {
-        ObservableCollection<ICountry> GetCountries();
-        decimal GetEXchangeRate(ICountry from, ICountry to);
-    }
     public class CurrencyConverterService : ICurrencyConverterService
     {
         public ObservableCollection<ICountry> GetCountries()
@@ -35,15 +31,26 @@ namespace CurrencyConverter.BusinessLayer
                         {
                             switch (detailNode.Name)
                             {
-                                case "name": country.Name = detailNode.InnerText; break; break;
-                                case "id": country.ID = detailNode.InnerText; break;
-                                case "alpha3": country.Alpha3 = detailNode.InnerText; break;
-                                case "currencyName": country.CurrencyName = detailNode.InnerText; break;
-                                case "currencyId": country.CurrencyId = detailNode.InnerText; break;
-                                case "currencySymbol": country.CurrencySymbol = detailNode.InnerText; break;
+                                case "name":
+                                    country.Name = detailNode.InnerText;
+                                    break;
+                                case "id":
+                                    country.ID = detailNode.InnerText;
+                                    break;
+                                case "alpha3":
+                                    country.Alpha3 = detailNode.InnerText;
+                                    break;
+                                case "currencyName":
+                                    country.CurrencyName = detailNode.InnerText;
+                                    break;
+                                case "currencyId":
+                                    country.CurrencyId = detailNode.InnerText;
+                                    break;
+                                case "currencySymbol":
+                                    country.CurrencySymbol = detailNode.InnerText;
+                                    break;
                             }
                         }
-
                         countries.Add(country);
                     }
                 }

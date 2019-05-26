@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using Interfaces.Core;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Core
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : IViewModelBase
     {
         bool isBusy;
         public bool IsBusy
@@ -18,6 +19,7 @@ namespace Core
                 NotifyPropertyChanged();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

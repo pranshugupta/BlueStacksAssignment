@@ -23,7 +23,7 @@
                                     StrokeThickness="4"
                                     Canvas.Left="135"
                                     Canvas.Top="100" />
-                                <Label Content="Loading.."></Label>
+                                <Label Content="Loading.." FontWeight="Bold" FontSize="15"></Label>
                             </StackPanel>
                         </Grid>
                         <ControlTemplate.Triggers>
