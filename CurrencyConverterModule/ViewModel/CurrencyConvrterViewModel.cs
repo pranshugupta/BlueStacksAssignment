@@ -1,7 +1,5 @@
 ﻿using Core;
-using CurrencyConverter.BusinessLayer;
 using CurrencyConverter.Interfaces;
-using RestSharp;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -75,10 +73,10 @@ namespace CurrencyConverter.ViewModel
 
         ICurrencyConverterService currencyConverterService;
 
-        public CurrencyConvrterViewModel()
+        public CurrencyConvrterViewModel(ICurrencyConverterService currencyConverterService)
         {
+            this.currencyConverterService = currencyConverterService;
             ConvertCommand = new RelayCommand(CanConvert, Convert);
-            currencyConverterService = new CurrencyConverterService(new RestClient());
 
             LoadCountries();
         }

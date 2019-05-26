@@ -1,5 +1,5 @@
 ﻿using CurrencyConverter.Interfaces;
-using CurrencyConverter.Model;
+using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -10,10 +10,12 @@ namespace CurrencyConverter.BusinessLayer
 {
     public class CurrencyConverterService : ICurrencyConverterService
     {
-        IRestClient restClient;
-        public CurrencyConverterService(IRestClient restClient)
+        private readonly IRestClient restClient;
+        private readonly IUnityContainer container;
+        public CurrencyConverterService(IUnityContainer container, IRestClient restClient)
         {
             this.restClient = restClient;
+            this.container = container;
         }
         public ObservableCollection<ICountry> GetCountries()
         {
@@ -30,7 +32,7 @@ namespace CurrencyConverter.BusinessLayer
                     ICountry country;
                     foreach (XmlNode countryNode in countryNodes)
                     {
-                        country = new Country();
+                        country = container.Resolve<ICountry>();
 
                         foreach (XmlNode detailNode in countryNode.ChildNodes)
                         {
@@ -81,7 +83,7 @@ namespace CurrencyConverter.BusinessLayer
         IRestResponse MakeRequest(string url)
         {
             restClient.BaseUrl = new Uri(url);
-            IRestResponse response = restClient.Execute(new RestRequest());
+            IRestResponse response = restClient.Execute(container.Resolve<IRestRequest>());
             return response;
         }
     }
