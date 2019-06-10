@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:Core;assembly=Core"
+             xmlns:e="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="TextErrorStyle" TargetType="{x:Type TextBox}">
@@ -80,11 +81,19 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
                 <Label Content="Amount:" Grid.Row="1" Grid.Column="0"/>
                 <TextBox  Grid.Row="1" Grid.Column="1" Style="{StaticResource TextErrorStyle}"
                       Text="{Binding FromAmount,Mode=TwoWay,   ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" 
-                          core:Behaviours.AttachedBehaviors.NumericOnlyBehavior.IsDigitOnly="True"/> 
+                          core:Behaviours.AttachedBehaviors.DigitOnlyBehavior.IsDigitOnly="True">
+                    <e:Interaction.Behaviors>
+                        <core:SelectAllBehaviour/>
+                    </e:Interaction.Behaviors>
+                </TextBox> 
 
                 <Label Content="Converted Amount:" Grid.Row="1" Grid.Column="2"/>
                 <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                  Grid.Row="1" Grid.Column="3" IsEnabled="False"/>
+                  Grid.Row="1" Grid.Column="3" IsEnabled="False">
+                    <e:Interaction.Behaviors>
+                        <core:SelectAllBehaviour/>
+                    </e:Interaction.Behaviors>
+                </TextBox>
                 <Button Content="Convert" Command="{Binding ConvertCommand}" Grid.Row="2" Grid.Column="3"/>
             </Grid>
         </StackPanel>

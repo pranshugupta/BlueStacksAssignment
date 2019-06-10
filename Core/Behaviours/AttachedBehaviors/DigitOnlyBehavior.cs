@@ -4,10 +4,10 @@ using System.Windows.Controls;
 
 namespace Core.Behaviours.AttachedBehaviors
 {
-    public static class NumericOnlyBehavior
+    public static class DigitOnlyBehavior
     {
         public static readonly DependencyProperty IsDigitOnlyProperty =
-            DependencyProperty.RegisterAttached("IsDigitOnly", typeof(bool), typeof(NumericOnlyBehavior), new PropertyMetadata(false, OnIsNumericOnlyChanged));
+            DependencyProperty.RegisterAttached("IsDigitOnly", typeof(bool), typeof(DigitOnlyBehavior), new PropertyMetadata(false, OnIsNumericOnlyChanged));
 
         public static bool GetIsDigitOnly(DependencyObject obj)
         {
