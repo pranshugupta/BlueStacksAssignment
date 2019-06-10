@@ -2,7 +2,7 @@
 
 namespace Interfaces.Core
 {
-    public interface IViewModelBase : INotifyPropertyChanged
+    public interface IViewModelBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         bool IsBusy { get; set; }
     }

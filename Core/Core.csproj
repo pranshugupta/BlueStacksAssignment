@@ -48,9 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IViewModelBase.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ScreenMaskControl.cs" />
-    <Compile Include="ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

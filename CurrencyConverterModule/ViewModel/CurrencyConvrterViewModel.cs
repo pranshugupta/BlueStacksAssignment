@@ -1,6 +1,7 @@
 ﻿using Core;
 using CurrencyConverter.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -124,6 +125,37 @@ namespace CurrencyConverter.ViewModel
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+
+
+        protected override void ValidateProperty(string propertyName)
+        {
+            List<string> listErrors = null;
+            if (propErrors.TryGetValue(propertyName, out listErrors) == false)
+                listErrors = new List<string>();
+            else
+                listErrors.Clear();
+
+            switch (propertyName)
+            {
+                case "FromAmount":
+                    if (FromAmount < 0)
+                    {
+                        listErrors.Add("Amount amount can not be than 0");
+                    }
+                    if (FromAmount == 0)
+                    {
+                        listErrors.Add("Amount should be greater than 0");
+                    }
+                    break;
+                default: break;
+            }
+
+            if (listErrors.Count > 0)
+            {
+                NotifyErrorsChanged(propertyName);
             }
         }
     }

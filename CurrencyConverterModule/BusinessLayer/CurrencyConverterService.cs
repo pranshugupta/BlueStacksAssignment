@@ -69,7 +69,8 @@ namespace CurrencyConverter.BusinessLayer
             }
             catch (Exception ex)
             {
-                throw new Exception("Looks like api server https://free.currconv.com is down. Try again later");
+                return null;
+                // throw new Exception("Looks like api server https://free.currconv.com is down. Try again later");
             }
         }
 

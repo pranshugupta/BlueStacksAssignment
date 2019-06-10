@@ -5,6 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:Core;assembly=Core"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="TextErrorStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TextErrorTemplate">
+                        <DockPanel LastChildFill="True">
+                            <AdornedElementPlaceholder>
+                                <Border BorderBrush="Red" BorderThickness="2"/>
+                            </AdornedElementPlaceholder>
+                            <TextBlock FontSize="20" Foreground="Red">*?*</TextBlock>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError"  Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                        Path=(Validation.Errors)[0].ErrorContent}"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <core:ScreenMaskControl>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBlock Margin="5"  Width="700" TextWrapping="Wrap" 
@@ -40,7 +62,7 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
                 <Label 
                     Content="Choose Currency Country:" 
                     Grid.Row="0" Grid.Column="0"/>
-                
+
                 <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
                   DisplayMemberPath="CurrencyId"
                   SelectedValue="{Binding FromCountry}" 
@@ -56,8 +78,8 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
                   Grid.Row="0" Grid.Column="3" />
 
                 <Label Content="Amount:" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding FromAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  Grid.Row="1" Grid.Column="1"/>
+                <TextBox  Grid.Row="1" Grid.Column="1" Style="{StaticResource TextErrorStyle}"
+                      Text="{Binding FromAmount,Mode=TwoWay,   ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Content="Converted Amount:" Grid.Row="1" Grid.Column="2"/>
                 <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
