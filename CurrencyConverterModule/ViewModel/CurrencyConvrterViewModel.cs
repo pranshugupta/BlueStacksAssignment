@@ -143,7 +143,7 @@ namespace CurrencyConverter.ViewModel
                 case "FromAmount":
                     if (FromAmount < 0)
                     {
-                        listErrors.Add("Amount amount can not be than 0");
+                        listErrors.Add("Amount amount can not be less than 0");
                     }
                     if (FromAmount == 0)
                     {

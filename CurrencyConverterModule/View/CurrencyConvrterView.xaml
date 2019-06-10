@@ -79,7 +79,8 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
 
                 <Label Content="Amount:" Grid.Row="1" Grid.Column="0"/>
                 <TextBox  Grid.Row="1" Grid.Column="1" Style="{StaticResource TextErrorStyle}"
-                      Text="{Binding FromAmount,Mode=TwoWay,   ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+                      Text="{Binding FromAmount,Mode=TwoWay,   ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" 
+                          core:Behaviours.AttachedBehaviors.NumericOnlyBehavior.IsDigitOnly="True"/> 
 
                 <Label Content="Converted Amount:" Grid.Row="1" Grid.Column="2"/>
                 <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
