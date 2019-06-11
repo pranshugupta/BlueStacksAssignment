@@ -7,10 +7,11 @@ namespace CurrencyConverter.Interfaces
     public interface ICurrencyConvrterViewModel : IViewModelBase
     {
         ObservableCollection<ICountry> Countries { get; set; }
+        bool AreCountriesPopulated { get; set; }
         ICountry FromCountry { get; set; }
-        decimal FromAmount { get; set; }
+        decimal? FromAmount { get; set; }
         ICountry ToCountry { get; set; }
-        decimal ToAmount { get; set; }
+        decimal? ToAmount { get; set; }
         ICommand ConvertCommand { get; set; }
     }
 }

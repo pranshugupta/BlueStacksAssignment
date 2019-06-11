@@ -69,8 +69,7 @@ namespace CurrencyConverter.BusinessLayer
             }
             catch (Exception ex)
             {
-                return null;
-                // throw new Exception("Looks like api server https://free.currconv.com is down. Try again later");
+                throw new Exception("Looks like api server https://free.currconv.com is down. Try again later", ex);
             }
         }
 
@@ -90,9 +89,9 @@ namespace CurrencyConverter.BusinessLayer
                 }
                 return exchangeRate;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Looks like api server https://free.currconv.com is down. Try again later");
+                throw new Exception("Looks like api server https://free.currconv.com is down. Try again later", ex);
             }
         }
 

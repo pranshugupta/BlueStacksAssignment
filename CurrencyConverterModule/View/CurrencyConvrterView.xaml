@@ -8,18 +8,22 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="TextErrorStyle" TargetType="{x:Type TextBox}">
+            <Style.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Style>
+            </Style.Resources>
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate x:Name="TextErrorTemplate">
-                        <DockPanel LastChildFill="True">
-                            <AdornedElementPlaceholder>
-                                <Border BorderBrush="Red" BorderThickness="2"/>
-                            </AdornedElementPlaceholder>
-                            <TextBlock FontSize="20" Foreground="Red">*?*</TextBlock>
-                        </DockPanel>
+                        <AdornedElementPlaceholder>
+                            <Border BorderBrush="Red" BorderThickness="2"/>
+                        </AdornedElementPlaceholder>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="150"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError"  Value="True">
                     <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
@@ -66,7 +70,8 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
 
                 <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
                   DisplayMemberPath="CurrencyId"
-                  SelectedValue="{Binding FromCountry}" 
+                  SelectedValue="{Binding FromCountry}"
+                IsEnabled="{Binding AreCountriesPopulated}"
                   IsEditable="True" 
                   Grid.Row="0" Grid.Column="1"/>
 
@@ -75,6 +80,7 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
                 <ComboBox ItemsSource="{Binding Path=Countries, Mode=OneWay}" 
                   DisplayMemberPath="CurrencyId"
                   SelectedValue="{Binding ToCountry}" 
+                   IsEnabled="{Binding AreCountriesPopulated}"
                   IsEditable="True" 
                   Grid.Row="0" Grid.Column="3" />
 
@@ -85,7 +91,7 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
                     <e:Interaction.Behaviors>
                         <core:SelectAllBehaviour/>
                     </e:Interaction.Behaviors>
-                </TextBox> 
+                </TextBox>
 
                 <Label Content="Converted Amount:" Grid.Row="1" Grid.Column="2"/>
                 <TextBox Text="{Binding ToAmount, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"

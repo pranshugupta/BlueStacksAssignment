@@ -23,6 +23,17 @@ namespace CurrencyConverter.ViewModel
             }
         }
 
+        bool areCountriesPopulated = false;
+        public bool AreCountriesPopulated
+        {
+            get { return areCountriesPopulated; }
+            set
+            {
+                areCountriesPopulated = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         ICountry fromCountry = null;
         public ICountry FromCountry
         {
@@ -34,8 +45,10 @@ namespace CurrencyConverter.ViewModel
             }
         }
 
-        decimal fromAmount;
-        public decimal FromAmount
+
+
+        decimal? fromAmount;
+        public decimal? FromAmount
         {
             get { return fromAmount; }
             set
@@ -58,8 +71,8 @@ namespace CurrencyConverter.ViewModel
             }
         }
 
-        decimal toAmount = 0;
-        public decimal ToAmount
+        decimal? toAmount = 0;
+        public decimal? ToAmount
         {
             get { return toAmount; }
             set
@@ -90,6 +103,7 @@ namespace CurrencyConverter.ViewModel
                 Task.Factory.StartNew(() => currencyConverterService.GetCountries());
                 await countriesTask;
                 Countries = countriesTask.Result;
+                AreCountriesPopulated = true;
             }
             catch (Exception ex)
             {
@@ -103,7 +117,7 @@ namespace CurrencyConverter.ViewModel
 
         private bool CanConvert(object arg)
         {
-            return true;
+            return AreCountriesPopulated && FromCountry != null && ToCountry != null && !HasErrors;
         }
 
         private async void Convert(object arg)
@@ -115,7 +129,7 @@ namespace CurrencyConverter.ViewModel
                 await exchangeRateTask;
                 if (exchangeRateTask.Result > 0)
                 {
-                    ToAmount = FromAmount * exchangeRateTask.Result;
+                    ToAmount = FromAmount.GetValueOrDefault() * exchangeRateTask.Result;
                 }
             }
             catch (Exception ex)
@@ -132,28 +146,40 @@ namespace CurrencyConverter.ViewModel
 
         protected override void ValidateProperty(string propertyName)
         {
-            List<string> listErrors = null;
-            if (propErrors.TryGetValue(propertyName, out listErrors) == false)
-                listErrors = new List<string>();
+            if (propErrors.ContainsKey(propertyName))
+            {
+                propErrors[propertyName].Clear();
+            }
             else
-                listErrors.Clear();
+            {
+                propErrors[propertyName] = new List<string>();
+
+            }
 
             switch (propertyName)
             {
-                case "FromAmount":
-                    if (FromAmount < 0)
+                case "FromCountry":
+                    if (FromCountry == null)
                     {
-                        listErrors.Add("Amount amount can not be less than 0");
+                        propErrors[propertyName].Add("Select From country");
                     }
+                    break;
+                case "ToCountry":
+                    if (ToCountry == null)
+                    {
+                        propErrors[propertyName].Add("Select To country");
+                    }
+                    break;
+                case "FromAmount":
                     if (FromAmount == 0)
                     {
-                        listErrors.Add("Amount should be greater than 0");
+                        propErrors[propertyName].Add("Amount must be greater than 0");
                     }
                     break;
                 default: break;
             }
 
-            if (listErrors.Count > 0)
+            if (propErrors[propertyName].Count > 0)
             {
                 NotifyErrorsChanged(propertyName);
             }
