@@ -15,3 +15,17 @@ Aplication exploits below framorks, most of them are added via nughet. Explicit 
 4. IOC Unity Container
 5. MOQ
 6. NUnit
+
+
+Todo:-
+1. Converter
+  a. Single Value Converter
+  b. Multivalue Converter
+2. Event to command
+  a. Event Trigger
+  b. Interactivity
+3. Trigger
+  a. Property
+  b. Data Trigger
+  c. Event Trigger - animation
+4. Grid Validation and error template
